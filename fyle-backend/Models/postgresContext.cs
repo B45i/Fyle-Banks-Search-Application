@@ -22,6 +22,7 @@ namespace fyle_backend.Models
         public virtual DbSet<BankBranches> BankBranches { get; set; }
         public virtual DbSet<Banks> Banks { get; set; }
         public virtual DbSet<Branches> Branches { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
