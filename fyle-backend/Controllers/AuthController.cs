@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using fyle_backend.Models;
+﻿using fyle_backend.Models;
 using fyle_backend.ServiceContracts;
 using fyle_backend.ServiceContracts.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace fyle_backend.Controllers
 {
@@ -15,10 +17,12 @@ namespace fyle_backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IConfiguration _config;
 
-        public AuthController(IUserService userService)
+        public AuthController(IUserService userService, IConfiguration config)
         {
             _userService = userService;
+            _config = config;
         }
 
         [HttpPost("register")]
@@ -37,6 +41,40 @@ namespace fyle_backend.Controllers
 
             var createdUser = _userService.Register(userToCreate, userRegister.Password);
             return StatusCode(201);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserRegisterDto userLogin)
+        {
+            var userFromDb = await _userService.Login(userLogin.Username.ToLower(), userLogin.Password);
+            if (userFromDb == null)
+            {
+                return Unauthorized();
+            }
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userFromDb.Id.ToString()),
+                new Claim(ClaimTypes.Name, userFromDb.Username)
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var tokenDescriptor = new SecurityTokenDescriptor()
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(5),
+                SigningCredentials = creds,
+
+            };
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return Ok(new
+            {
+                token = tokenHandler.WriteToken(token)
+            });
+
         }
     }
 }

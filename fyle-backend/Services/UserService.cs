@@ -30,7 +30,7 @@ namespace fyle_backend.Services
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            await _dbContext.AddAsync(user);
+            await _dbContext.AddAsync(user);    
             await _dbContext.SaveChangesAsync();
             return user;
         }
