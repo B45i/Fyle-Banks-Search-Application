@@ -25,6 +25,7 @@ namespace fyle_backend
             services.AddControllers();
             services.AddDbContext<postgresContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IBankService, BankService>();
+            services.AddScoped<IBranchService, BranchService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
