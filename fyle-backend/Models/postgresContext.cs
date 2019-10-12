@@ -1,18 +1,22 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace fyle_backend.Models
 {
     public partial class postgresContext : DbContext
     {
+        private IConfiguration _configuration;
+
         public postgresContext()
         {
         }
 
-        public postgresContext(DbContextOptions<postgresContext> options)
+        public postgresContext(DbContextOptions<postgresContext> options, IConfiguration configuration)
             : base(options)
         {
+            _configuration = configuration;
         }
 
         public virtual DbSet<BankBranches> BankBranches { get; set; }
@@ -23,8 +27,7 @@ namespace fyle_backend.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseNpgsql("Host=localhost;Database=postgres;Username=postgres;Password=admin");
+                optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
             }
         }
 
