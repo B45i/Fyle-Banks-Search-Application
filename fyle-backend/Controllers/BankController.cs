@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using fyle_backend.Models;
+using fyle_backend.ServiceContracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,36 +13,20 @@ namespace fyle_backend.Controllers
     [ApiController]
     public class BankController : ControllerBase
     {
-        // GET: api/Bank
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        IBankService _bankService;
+        public BankController(IBankService bankService)
         {
-            return new string[] { "value1", "value2" };
+            _bankService = bankService;
         }
 
         // GET: api/Bank/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{ifsc}", Name = "Get")]
+
+        public BankBranches Get(string ifsc)
         {
-            return "value";
+            return _bankService.GetBankDetails(ifsc);
         }
 
-        // POST: api/Bank
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Bank/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
