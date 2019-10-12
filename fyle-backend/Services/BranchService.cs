@@ -17,7 +17,9 @@ namespace fyle_backend.Services
         }
         public IList<BankBranches> GetBranchesByCity(string bankName, string city)
         {
-            return _dbContext.BankBranches.Where(x => x.BankName == bankName && x.City == city).ToList();
+            return _dbContext.BankBranches.Where(
+                x => x.BankName.ToLower() == bankName.ToLower() && 
+                x.City.ToLower() == city.ToLower()).ToList();
         }
     }
 }
