@@ -26,7 +26,7 @@ namespace fyle_backend.Controllers
             [FromQuery] int limit,
             [FromQuery] int offset)
         {
-            return await _branchService.GetBranchesByCityAsync(bank, city, limit < 1 ? limit : 15, offset < 1 ? offset : 0);
+            return await _branchService.GetBranchesByCityAsync(bank, city, limit >= 0 ? limit : 15, offset >= 0 ? offset : 0);
         }
 
     }
