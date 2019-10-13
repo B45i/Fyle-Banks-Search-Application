@@ -3,6 +3,7 @@ using fyle_backend.ServiceContracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace fyle_backend.Controllers
 {
@@ -19,9 +20,13 @@ namespace fyle_backend.Controllers
         }
 
         [HttpGet]
-        public IList<BankBranches> Get([FromQuery] string bank, [FromQuery] string city)
+        public async Task<IList<BankBranches>> Get(
+            [FromQuery] string bank,
+            [FromQuery] string city,
+            [FromQuery] int limit,
+            [FromQuery] int offset)
         {
-            return _branchService.GetBranchesByCity(bank, city);
+            return await _branchService.GetBranchesByCityAsync(bank, city, limit < 1 ? limit : 15, offset < 1 ? offset : 0);
         }
 
     }
