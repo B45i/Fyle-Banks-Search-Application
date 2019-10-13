@@ -39,7 +39,7 @@ namespace fyle_backend.Controllers
                 Username = userRegister.Username
             };
 
-            var createdUser = _userService.Register(userToCreate, userRegister.Password);
+            var createdUser = await _userService.Register(userToCreate, userRegister.Password);
             return StatusCode(201);
         }
 
