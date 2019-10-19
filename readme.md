@@ -39,7 +39,7 @@ curl -X POST \
   -H 'Content-Length: 46' \
   -H 'Content-Type: application/json' \
   -H 'Host: fyle-net.herokuapp.com' \
-  -H 'Postman-Token: 03002676-9301-42ee-93bc-8b3c5fefb30c,eabf9aa5-d81e-4e12-8e08-b025f45d67d4' \
+  -H 'Postman-Token: 420bd6fe-aa74-4e06-a617-fde9ece6b068,a60c7359-76ce-4ef1-9d33-7a24540864ce' \
   -H 'User-Agent: PostmanRuntime/7.18.0' \
   -H 'cache-control: no-cache' \
   -d '{
@@ -67,7 +67,7 @@ curl -X POST \
   -H 'Content-Length: 46' \
   -H 'Content-Type: application/json' \
   -H 'Host: fyle-net.herokuapp.com' \
-  -H 'Postman-Token: 775534a9-68e1-4f75-bc97-f4dab5d1e97b,4a8e665a-03f4-4655-962b-4f8dd88b4cec' \
+  -H 'Postman-Token: 22626c36-cafe-4d49-92c9-5c65b8a2e493,a329256c-3881-4fb6-8b6f-853743b53e9b' \
   -H 'User-Agent: PostmanRuntime/7.18.0' \
   -H 'cache-control: no-cache' \
   -d '{
@@ -91,11 +91,11 @@ curl -X GET \
   https://fyle-net.herokuapp.com/api/bank/ABHY0065001 \
   -H 'Accept: */*' \
   -H 'Accept-Encoding: gzip, deflate' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMSIsInVuaXF1ZV9uYW1lIjoicmFmaSIsIm5iZiI6MTU3MDk5NDE5MywiZXhwIjoxNTcxNDI2MTkzLCJpYXQiOjE1NzA5OTQxOTN9.Nz4h4EFSdF_7-s4eahHQgqkaZTnfPJrUMCAy7Ie02jw' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMyIsInVuaXF1ZV9uYW1lIjoiYjQ1aSIsIm5iZiI6MTU3MTQ2OTQyMCwiZXhwIjoxNTcxOTAxNDIwLCJpYXQiOjE1NzE0Njk0MjB9.el9TWNitPDQJ0HkJIEpcJZPrJ3zUnN7mwh0xTGcBYfA' \
   -H 'Cache-Control: no-cache' \
   -H 'Connection: keep-alive' \
   -H 'Host: fyle-net.herokuapp.com' \
-  -H 'Postman-Token: 6f3528d3-ec09-4138-87cc-af646d3069fd,2bdc35c0-5b43-47b8-a225-15fc4225ce3c' \
+  -H 'Postman-Token: 3a79b942-2315-4e48-940a-ebccf930220a,154d2f94-45c5-4914-9991-359d6f958645' \
   -H 'User-Agent: PostmanRuntime/7.18.0' \
   -H 'cache-control: no-cache'
 ```
@@ -112,11 +112,11 @@ curl -X GET \
   'https://fyle-net.herokuapp.com/api/branch/?bank=ABHYUDAYA%20COOPERATIVE%20BANK%20LIMITED&city=mumbai&offset=2&limit=3' \
   -H 'Accept: */*' \
   -H 'Accept-Encoding: gzip, deflate' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMSIsInVuaXF1ZV9uYW1lIjoicmFmaSIsIm5iZiI6MTU3MDk5NDE5MywiZXhwIjoxNTcxNDI2MTkzLCJpYXQiOjE1NzA5OTQxOTN9.Nz4h4EFSdF_7-s4eahHQgqkaZTnfPJrUMCAy7Ie02jw' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMyIsInVuaXF1ZV9uYW1lIjoiYjQ1aSIsIm5iZiI6MTU3MTQ2OTQyMCwiZXhwIjoxNTcxOTAxNDIwLCJpYXQiOjE1NzE0Njk0MjB9.el9TWNitPDQJ0HkJIEpcJZPrJ3zUnN7mwh0xTGcBYfA' \
   -H 'Cache-Control: no-cache' \
   -H 'Connection: keep-alive' \
   -H 'Host: fyle-net.herokuapp.com' \
-  -H 'Postman-Token: 66684634-0fef-43d1-82a0-dd6b5ed8037c,b02f67d9-a15d-4f7b-8684-628b88bfda0c' \
+  -H 'Postman-Token: 92acaacb-2f0a-4835-96f1-3264960d68b4,8688783a-dae1-412f-8ea7-1840774e7958' \
   -H 'User-Agent: PostmanRuntime/7.18.0' \
   -H 'cache-control: no-cache'
 ```
