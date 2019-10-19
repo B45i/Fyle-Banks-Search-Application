@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Text;
 
 namespace fyle_backend
@@ -18,15 +19,20 @@ namespace fyle_backend
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            // Unable to use EnvironmentService here, so reading it directly from env
+            _connectionString = Environment.GetEnvironmentVariable(Constants.CONNECTION_STRING);
+            _jwtSecret = Environment.GetEnvironmentVariable(Constants.JWT_SECRET);
         }
 
         public IConfiguration Configuration { get; }
+        private readonly string _connectionString;
+        private readonly string _jwtSecret;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<postgresContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<postgresContext>(options => options.UseNpgsql(_connectionString));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -34,7 +40,7 @@ namespace fyle_backend
                     {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                            Encoding.UTF8.GetBytes(_jwtSecret)),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };

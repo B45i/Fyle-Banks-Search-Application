@@ -2,13 +2,12 @@
 using fyle_backend.ServiceContracts;
 using fyle_backend.ServiceContracts.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
 
 namespace fyle_backend.Controllers
 {
@@ -17,12 +16,12 @@ namespace fyle_backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IConfiguration _config;
+        private readonly string _jwtSecret;
 
-        public AuthController(IUserService userService, IConfiguration config)
+        public AuthController(IUserService userService)
         {
             _userService = userService;
-            _config = config;
+            _jwtSecret = Environment.GetEnvironmentVariable(Constants.JWT_SECRET);
         }
 
         [HttpPost("register")]
@@ -58,7 +57,7 @@ namespace fyle_backend.Controllers
                 new Claim(ClaimTypes.Name, userFromDb.Username)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSecret));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var tokenDescriptor = new SecurityTokenDescriptor()
